@@ -139,7 +139,7 @@ var ORDER=Object.keys(GR);
 var GROUPS=['Инженерные системы','Отделка','Строительство','Сервис и сборка'];
 /* ===== НАСТРОЙКИ (те же, что на сайте) ===== */
 var PAY='https://link.payform.ru/?paymentLinkId=8551c4ba-08ef-4eac-916e-472c0bf1ae49';
-var PRICE={now:1990,promo:1990}; var SEATS=32; function seatW(n){var m=n%100,k=n%10;if(m>10&&m<20)return 'мест';if(k==1)return 'место';if(k>1&&k<5)return 'места';return 'мест';}
+var PRICE={now:1490,old:1990,promo:1490}; var SEATS=20; function seatW(n){var m=n%100,k=n%10;if(m>10&&m<20)return 'мест';if(k==1)return 'место';if(k>1&&k<5)return 'места';return 'мест';}
 var PROMO={on:false,code:'MASTER500',off:500,left:19}; /* left обновляется вручную по реальным продажам */
 var CONTACTS={wa:'https://wa.me/79822069375',tg:'https://t.me/Kozlov_Ander',max:'https://max.ru/u/f9LHodD0cOIiMp48uDSHYmT1loMaqalzVBb68QA-3nTWy5MKGPsk7VvbRoE',phone:'+7 982 206-93-75'};
 /* ========================================= */
@@ -169,7 +169,7 @@ function openMax(u){hap();try{if(!TGW&&W&&W.openMaxLink){W.openMaxLink(u);return
 function openTg(u){hap();try{if(TGW&&TGW.openTelegramLink){TGW.openTelegramLink(u);return;}}catch(e){}openExt(u);}
 function num(s){var m=/(более|почти)?\s*(\d+)/.exec(s)||[];return {p:m[1]||'',n:m[2]||''};}
 function priceBlock(small){
- if(!PROMO.on||PROMO.left<1)return '<div class="price"><b>'+rub(PRICE.now)+'</b><small>'+small+'</small></div>'+(SEATS>0?'<div class="promo"><div><span>Цена '+rub(PRICE.now)+'</span><b>Осталось '+SEATS+' '+seatW(SEATS)+'</b><em>по этой цене</em></div></div>':'');
+ if(!PROMO.on||PROMO.left<1)return '<div class="price"><b>'+rub(PRICE.now)+'</b><small>'+(PRICE.old?'<s>'+rub(PRICE.old)+'</s> скидка · ':'')+small+'</small></div>'+(SEATS>0?'<div class="promo"><div><span>Цена со скидкой '+rub(PRICE.now)+'</span><b>Осталось '+SEATS+' '+seatW(SEATS)+'</b><em>по этой цене</em></div></div>':'');
  return '<div class="price"><b>'+rub(PRICE.promo)+'</b><small><s>'+rub(PRICE.now)+'</s> без промокода · '+small+'</small></div>'+
  '<div class="promo"><div><span>Промокод</span><b>'+PROMO.code+'</b><em>Осталось '+PROMO.left+' мест по промокоду</em></div><button class="btn s sun" data-copy="'+PROMO.code+'">Копировать</button></div>';
 }
@@ -184,7 +184,7 @@ V.home=function(){return ''+
 '<section class="hero"><div class="pad"><div class="txt"><div class="eyebrow">Таблицы Excel для мастеров</div>'+
 '<h1>Смета, допсоглашение и акт в одной таблице</h1>'+
 '<p class="lead">25 направлений: электрика, сантехника, отделка, кровля, строительство, мастер на час и другие. Впишите объём работ, остальное посчитается само.</p>'+
-'<div class="cta"><button class="btn block" data-v="catalog">Выбрать таблицу</button>'+buyBtn('Купить за '+rub(PROMO.on&&PROMO.left>0?PRICE.promo:PRICE.now),'o')+'</div>'+(SEATS>0?'<div class="seats">Осталось '+SEATS+' '+seatW(SEATS)+' по цене '+rub(PRICE.now)+'</div>':'')+
+'<div class="cta"><button class="btn block" data-v="catalog">Выбрать таблицу</button>'+buyBtn('Купить за '+rub(PROMO.on&&PROMO.left>0?PRICE.promo:PRICE.now),'o')+'</div>'+(SEATS>0?'<div class="seats">Осталось '+SEATS+' '+seatW(SEATS)+' по цене '+rub(PRICE.now)+(PRICE.old?' вместо '+rub(PRICE.old):'')+'</div>':'')+
 '<div class="facts"><span>25 таблиц</span><span>6 листов в каждой</span><span>один архив с файлами</span></div></div>'+
 '<figure><img src="'+U('img/hero.webp')+'" alt="Таблица Excel: смета, прайс и акт" width="900" height="600"></figure></div></section>'+
 '<section class="band"><div class="pad"><div class="head"><div class="eyebrow">Как это работает</div><h2>Четыре шага до акта</h2></div><div class="steps">'+
